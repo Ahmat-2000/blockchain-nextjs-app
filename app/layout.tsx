@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import NavBar from "@/components/NavBar";
+import Welcome from "@/components/Welcome";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,9 +28,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen text-white`}
       >
-        {children}
+        <header className="gradient-bg-welcome">
+          <NavBar />
+          <Welcome />
+        </header>
+        <main>
+          {children}
+        </main>
       </body>
     </html>
   );
