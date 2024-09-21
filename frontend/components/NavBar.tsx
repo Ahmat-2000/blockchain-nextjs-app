@@ -25,7 +25,7 @@ const NavBar: React.FC = () => {
   return (
     <nav className="w-full flex justify-between items-center p-4 md:justify-around lg:justify-center">
       <div className="md:flex-[0.5] flex-initial justify-center items-center">
-        <Image src={logo} alt="logo" className="w-32 cursor-pointer" />
+        <Image src={logo} alt="logo" className="w-32 cursor-pointer hover:opacity-75" />
       </div>
       {/* Desktop menu */}
       <ul className="hidden flex-row flex-initial justify-between items-center md:flex">
@@ -34,7 +34,7 @@ const NavBar: React.FC = () => {
             <NavBarItem key={index} title={item} classProps=""/>
           ))
         }
-        <li className="py-2 px-7 rounded-full bg-blue-600 hover:opacity-75 cursor-pointer">
+        <li className="py-2 px-7 rounded-xl bg-blue-600 hover:opacity-75 cursor-pointer">
           Login
         </li>
       </ul>
@@ -52,6 +52,9 @@ const NavBar: React.FC = () => {
                   <NavBarItem key={index} title={item} classProps=" text-lg border text-center bg-gray-200 text-black rounded-md p-2 w-full sm:w-4/5"/>
                 ))
               }
+              <li className="text-center p-2 w-full sm:w-4/5 rounded-xl bg-blue-600 hover:opacity-75 cursor-pointer">
+                Login
+              </li>
             </ul>
         }
       </div>
