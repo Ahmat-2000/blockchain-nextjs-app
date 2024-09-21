@@ -28,9 +28,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen text-white`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen text-white container mx-auto gradient-bg-welcome`}
       >
-        <header className="gradient-bg-welcome">
+        <header className="">
           <NavBar />
           <Welcome />
         </header>

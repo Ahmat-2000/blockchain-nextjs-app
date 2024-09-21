@@ -8,11 +8,11 @@ import { IoMdMenu } from "react-icons/io";
 
 type NavBarItemPropsType = {
   title : string,
-  classProps: string,
+  className?: string,
 }
-const NavBarItem: React.FC<NavBarItemPropsType> = ({title, classProps}) => {
+const NavBarItem: React.FC<NavBarItemPropsType> = ({title, className}) => {
   return (
-    <li className={`mx-4 cursor-pointer font-bold hover:opacity-75 ${classProps}`}>
+    <li className={`mx-4 cursor-pointer font-bold hover:opacity-75 ${className}`}>
       {title}
     </li>
   )
@@ -23,18 +23,18 @@ const navList: string[] = ["Market", "Exchange", "Tutorials", "Wallets"];
 const NavBar: React.FC = () => {
   const [toggleMenu, setToggleMenu] = useState<boolean>(false);
   return (
-    <nav className="w-full flex justify-between items-center p-4 md:justify-around lg:justify-center">
-      <div className="md:flex-[0.5] flex-initial justify-center items-center">
+    <nav className="flex justify-between items-center p-4">
+      <div className="justify-center items-center">
         <Image src={logo} alt="logo" className="w-32 cursor-pointer hover:opacity-75" />
       </div>
       {/* Desktop menu */}
       <ul className="hidden flex-row flex-initial justify-between items-center md:flex">
         {
           navList.map((item, index) => (
-            <NavBarItem key={index} title={item} classProps=""/>
+            <NavBarItem key={index} title={item} className="hover:shadow-xl rounded-md p-[1px] hover:shadow-neutral-200"/>
           ))
         }
-        <li className="py-2 px-7 rounded-xl bg-blue-600 hover:opacity-75 cursor-pointer">
+        <li className="py-1 px-5 rounded-xl bg-blue-600 hover:opacity-75 cursor-pointer transition-opacity duration-200">
           Login
         </li>
       </ul>
@@ -43,16 +43,16 @@ const NavBar: React.FC = () => {
         <IoMdMenu className={`md:hidden cursor-pointer ${toggleMenu && "opacity-0"}`} fontSize={40} onClick={() => setToggleMenu(true)}/>
         {
           toggleMenu &&
-            <ul className="bg-blue-glassmorphism z-10 fixed top-0 right-0 p-3 w-[50vw] h-screen shadow-2xl flex flex-col gap-5 justify-start items-center rounded-md md:hidden transition-all duration-1000">
+            <ul className="blue-glassmorphism z-10 fixed top-0 right-0 p-3 w-full sm:w-1/2 h-screen shadow-2xl flex flex-col gap-5 justify-start items-center rounded-md md:hidden transition-all duration-1000">
               <li className="text-xl w-full flex justify-end">
-                <IoMdClose className="md:hidden cursor-pointer" fontSize={40} onClick={() => setToggleMenu(false)}/>
+                <IoMdClose className="md:hidden cursor-pointer mr-2" fontSize={40} onClick={() => setToggleMenu(false)}/>
               </li>
               {
                 navList.map((item, index) => (
-                  <NavBarItem key={index} title={item} classProps=" text-lg border text-center bg-gray-200 text-black rounded-md p-2 w-full sm:w-4/5"/>
+                  <NavBarItem key={index} title={item} className=" text-lg border text-center bg-gray-200 text-black rounded-md p-2 w-1/2"/>
                 ))
               }
-              <li className="text-center p-2 w-full sm:w-4/5 rounded-xl bg-blue-600 hover:opacity-75 cursor-pointer">
+              <li className="text-center p-2 w-1/2 rounded-xl bg-blue-600 hover:opacity-75 cursor-pointer ">
                 Login
               </li>
             </ul>
