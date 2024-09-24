@@ -23,12 +23,12 @@ const navList: string[] = ["Market", "Exchange", "Tutorials", "Wallets"];
 const NavBar: React.FC = () => {
   const [toggleMenu, setToggleMenu] = useState<boolean>(false);
   return (
-    <nav className="flex justify-between items-center p-4">
-      <div className="justify-center items-center">
+    <nav className="flex justify-between items-center p-4 ">
+      <div className="justify-center items-center ">
         <Image src={logo} alt="logo" className="w-32 cursor-pointer hover:opacity-75" />
       </div>
       {/* Desktop menu */}
-      <ul className="hidden flex-row flex-initial justify-between items-center md:flex">
+      <ul className="hidden flex-row flex-initial justify-between items-center  md:flex">
         {
           navList.map((item, index) => (
             <NavBarItem key={index} title={item} className="hover:shadow-xl rounded-md p-[1px] hover:shadow-neutral-200"/>
@@ -39,7 +39,7 @@ const NavBar: React.FC = () => {
         </li>
       </ul>
       {/* Mobile menu */}
-      <div className="flex relative">
+      <div className="flex relative md:hidden">
         <IoMdMenu className={`md:hidden cursor-pointer ${toggleMenu && "opacity-0"}`} fontSize={40} onClick={() => setToggleMenu(true)}/>
         {
           toggleMenu &&

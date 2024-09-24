@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen text-white container mx-auto gradient-bg-welcome`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen text-white gradient-bg-welcome max-w-5xl mx-auto`}
       >
         <header className="">
           <NavBar />
