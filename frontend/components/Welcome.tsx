@@ -90,7 +90,7 @@ const Welcome: React.FC = (): React.JSX.Element => {
           false ? 
           <Loader /> 
           : 
-          <button type="button" onClick={handleSubmit} className="w-full mt-2 border-[1px] p-2 border-gray-600 cursor-pointer rounded-lg">
+          <button type="button" onClick={handleSubmit} className="w-full mt-2 border-[1px] p-2 border-gray-600 cursor-pointer rounded-lg hover:bg-slate-300 text-black transition-colors duration-500 bg-slate-400">
             Send Now
           </button>
          }
