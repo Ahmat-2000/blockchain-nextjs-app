@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
 import Welcome from "@/components/Welcome";
+import { TransactionsProvider } from "@/context/TransactionContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -30,13 +31,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen text-white gradient-bg-welcome max-w-5xl mx-auto`}
       >
-        <header className="">
-          <NavBar />
-          <Welcome />
-        </header>
-        <main>
-          {children}
-        </main>
+        <TransactionsProvider>
+          <header className="">
+            <NavBar />
+            <Welcome />
+          </header>
+          <main>
+            {children}
+          </main>
+        </TransactionsProvider>
       </body>
     </html>
   );

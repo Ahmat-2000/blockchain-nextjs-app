@@ -19,8 +19,5 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 
-# smart contracts dependencies
-
-```bash
-npm install --save-dev hardhat @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers ethers
-```
+## how to deploy the contract
+- https://docs.alchemy.com/docs/how-to-deploy-a-smart-contract-to-the-sepolia-testnet
