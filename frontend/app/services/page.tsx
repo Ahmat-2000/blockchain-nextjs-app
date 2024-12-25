@@ -23,7 +23,8 @@ const servicesData = [
   }
 ];
 
-const ServiceCard = ({color, title , icon , subtitle}) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const ServiceCard = ({color, title , icon , subtitle}: any) => {
   return(
     <div className="flex justify-between items-center white-glassmorphism py-2 px-3 cursor-pointer gap-3 hover:shadow-pink-500 duration-500 sm:flex-row shadow-teal-500 shadow-md">
       <div className={`p-3 rounded-full flex justify-center items-center ${color}`}>
