@@ -104,7 +104,7 @@ const Welcome: React.FC = (): React.JSX.Element => {
             </div>
         </div>
 
-        <form className="flex flex-col justify-start items-center w-full max-w-lg rounded-lg blue-glassmorphism border p-5 md:w-96 md:order-2 shadow-purple-700 shadow-md">
+        <form className="flex flex-col justify-start items-center w-full max-w-lg rounded-lg  border p-5 md:w-96 md:order-2 shadow-purple-700 shadow-md">
           <Input name="addressTo" value={formData.addressTo} placeholder="Address To" type="text" handelChange={handleformChange}/>
           <Input name="amount" value={formData.amount} placeholder="Amount (ETH)" type="number" handelChange={handleformChange}/>
           <Input name="keyword" value={formData.keyword} placeholder="Keyword (GIFT)" type="text" handelChange={handleformChange}/>

@@ -36,6 +36,11 @@ const getEthereumContract = async () => {
   return transactionContract;
 };
 
+/**
+ * This file should be .tsx
+ * @param {*} param0 
+ * @returns 
+ */
 export const TransactionsProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [formData, setFormData] = useState({ addressTo: '', amount: '', keyword: '', message: '' });
