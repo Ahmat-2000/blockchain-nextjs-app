@@ -18,7 +18,7 @@ type inputType = {
 const Input: React.FC<inputType> = ({placeholder, name, type, handelChange, value}) => {
   return(
     <input 
-      className="my-2 w-full rounded-md p-2 outline-none shadow-slate-600 bg-transparent shadow-sm border-none text-sm white-glassmorphism focus:shadow-pink-500 duration-500"
+      className="my-2 w-full text-base rounded-md p-2 outline-none border-none shadow-slate-600 bg-transparent shadow-sm white-glassmorphism focus:shadow-pink-500 duration-500"
       name={name} 
       value={value} 
       placeholder={placeholder} 
@@ -104,7 +104,7 @@ const Welcome: React.FC = (): React.JSX.Element => {
             </div>
         </div>
 
-        <form className="flex flex-col justify-start items-center w-full max-w-lg rounded-lg blue-glassmorphism border p-5 md:w-96 md:order-2 shadow-purple-700 shadow-md">
+        <form className="flex flex-col justify-start items-center w-full max-w-lg rounded-lg blue-glassmorphism border p-5 shadow-purple-700 shadow-md md:w-96 md:order-2 ">
           <Input name="addressTo" value={formData.addressTo} placeholder="Address To" type="text" handelChange={handleformChange}/>
           <Input name="amount" value={formData.amount} placeholder="Amount (ETH)" type="number" handelChange={handleformChange}/>
           <Input name="keyword" value={formData.keyword} placeholder="Keyword (GIFT)" type="text" handelChange={handleformChange}/>
