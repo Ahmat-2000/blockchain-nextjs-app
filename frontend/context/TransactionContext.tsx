@@ -111,7 +111,7 @@ export const TransactionsProvider = ({ children }) => {
         params: [{
           from: currentAccount,
           to: addressTo,
-          gas: '0x5208', // 21000 Gwei
+          gas: '0x5208', // 21000 Gwei = 0.00001 ether
           value: parseAmount, // Amount in hexadecimal format
         }],
       });
@@ -149,6 +149,7 @@ export const TransactionsProvider = ({ children }) => {
       currentAccount,
       formData,
       isLoading,
+      transactionCount,
       connectToWallet,
       setFormData,
       handleformChange,

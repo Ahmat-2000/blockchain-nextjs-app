@@ -4,6 +4,7 @@ import "./globals.css";
 import NavBar from "@/components/NavBar";
 import Welcome from "@/components/Welcome";
 import { TransactionsProvider } from "@/context/TransactionContext";
+import Hr from "@/components/Hr";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -35,6 +36,7 @@ export default function RootLayout({
           <header className="">
             <NavBar />
             <Welcome />
+            <Hr />
           </header>
           <main>
             {children}

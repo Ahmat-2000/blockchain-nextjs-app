@@ -18,7 +18,7 @@ type inputType = {
 const Input: React.FC<inputType> = ({placeholder, name, type, handelChange, value}) => {
   return(
     <input 
-      className="my-2 w-full rounded-md p-2 outline-none shadow-slate-600 bg-transparent shadow-sm border-none text-sm white-glassmorphism"
+      className="my-2 w-full rounded-md p-2 outline-none shadow-slate-600 bg-transparent shadow-sm border-none text-sm white-glassmorphism focus:shadow-pink-500 duration-500"
       name={name} 
       value={value} 
       placeholder={placeholder} 
@@ -74,11 +74,11 @@ const Welcome: React.FC = (): React.JSX.Element => {
           </button>)
         }
 
-        <div className="grid grid-flow-row grid-cols-2 mt-10 border-l border-t border-gray-500 sm:w-[90%]  sm:grid-cols-3 border-collapse">
+        <div className="grid grid-flow-row grid-cols-2 mt-10 border-l border-t border-gray-500 sm:w-[90%]  sm:grid-cols-3 border-collapse shadow-md">
           {
             marketList.map((item, index) => 
               <span 
-                className={`text-center text-sm font-light py-4 border-gray-500 border-r border-b `} 
+                className={`text-center text-sm font-medium py-4 border-gray-500 border-r border-b `} 
                 key={index}
               >
                 {item}
@@ -88,23 +88,23 @@ const Welcome: React.FC = (): React.JSX.Element => {
       
       </div>
 
-      <div className="flex flex-col w-full justify-start sm:w-auto sm:flex-row gap-5 md:flex-col">
+      <div className="flex flex-col justify-start sm:w-auto sm:flex-row gap-5 md:flex-col">
 
-        <div className="flex flex-col justify-between rounded-xl p-2 min-[480px]:max-w-[400px] sm:w-[80%] sm:order-2 md:order-1 md:w-96 h-[200px] eth-card shadow-teal-400 shadow-md ">
+        <div className="flex flex-col justify-between rounded-xl p-2 min-[480px]:max-w-[400px] sm:w-[80%] sm:order-2 md:order-1 md:w-96 h-[200px] eth-card shadow-teal-500 shadow-md hover:shadow-pink-500 duration-500">
             <div className="flex justify-between items-center ">
               <SiEthereum fontSize={30} className="border-2 rounded-full p-1" color="white"/>
               <BsInfoCircle fontSize={17} color="white"/>
             </div>
             
-            <div className=" flex flex-col gap-2 ">
-              <p className="text-sm ">
-                {currentAccount || "Connect your wallet to see address"}
+            <div className="flex flex-col gap-2 overflow-scroll">
+              <p className="text-sm">
+                {currentAccount|| "Connect your wallet"}
               </p>
               <span className="font-semibold text-lg">Ethereum</span>
             </div>
         </div>
 
-        <form className="flex flex-col justify-start items-center w-full rounded-lg blue-glassmorphism border p-5 md:w-96 md:order-2">
+        <form className="flex flex-col justify-start items-center w-full max-w-lg rounded-lg blue-glassmorphism border p-5 md:w-96 md:order-2 shadow-purple-700 shadow-md">
           <Input name="addressTo" value={formData.addressTo} placeholder="Address To" type="text" handelChange={handleformChange}/>
           <Input name="amount" value={formData.amount} placeholder="Amount (ETH)" type="number" handelChange={handleformChange}/>
           <Input name="keyword" value={formData.keyword} placeholder="Keyword (GIFT)" type="text" handelChange={handleformChange}/>

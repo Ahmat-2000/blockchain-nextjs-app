@@ -25,16 +25,16 @@ const NavBar: React.FC = () => {
   return (
     <nav className="flex justify-between items-center p-4 ">
       <div className="justify-center items-center ">
-        <Image src={logo} alt="logo" className="w-32 cursor-pointer hover:opacity-75" />
+        <Image src={logo} alt="logo" className="w-32 cursor-pointer hover:opacity-75 duration-500" />
       </div>
       {/* Desktop menu */}
-      <ul className="hidden flex-row flex-initial justify-between items-center  md:flex">
+      <ul className="hidden flex-row flex-initial justify-between items-center md:flex">
         {
           navList.map((item, index) => (
-            <NavBarItem key={index} title={item} className="hover:shadow-xl rounded-md p-[1px] hover:shadow-neutral-200"/>
+            <NavBarItem key={index} title={item} className="hover:shadow-md rounded-md p-2 hover:shadow-pink-400 duration-500"/>
           ))
         }
-        <li className="py-1 px-5 rounded-xl bg-blue-600 hover:opacity-75 cursor-pointer transition-opacity duration-200">
+        <li className="py-1 px-5 rounded-xl bg-blue-600 hover:opacity-75 cursor-pointer transition-opacity duration-500">
           Login
         </li>
       </ul>
