@@ -7,9 +7,9 @@ import { contractABI, contractAddress } from '@/utils/constant.js';
 export const TransactionsContext = React.createContext({});
 
 /**
- * Get the Ethereum contract instance
+ * Create the Ethereum contract instance
  */
-const getEthereumContract = async () => {
+const createEthereumContract = async () => {
   let signer = null;
   let provider;
 
@@ -46,6 +46,7 @@ export const TransactionsProvider = ({ children }) => {
   const [formData, setFormData] = useState({ addressTo: '', amount: '', keyword: '', message: '' });
   const [isLoading, setIsLoading] = useState(false);
   const [transactionCount, setTransactionCount] = useState(null);
+  const [allTransactions, setAllTransactions] = useState([]);
 
   /**
    * Handle form input changes.
@@ -53,6 +54,30 @@ export const TransactionsProvider = ({ children }) => {
   const handleformChange = (e) => {
     setFormData((prevState) => ({ ...prevState, [e.target.name]: e.target.value }));
   };
+
+  const getAllTransactions = async () => {
+    try {
+      if (!window.ethereum) {
+        return alert("Please install MetaMask");
+      }
+      const transactionContract = await createEthereumContract();
+      const availableTransactions = await transactionContract.getAllTransactions();
+      setAllTransactions(availableTransactions.map((transaction) => ({
+        addressFrom : transaction[0],
+        addressTo : transaction[1],
+        amount : parseInt(transaction[2]) / 10**18,
+        message : transaction[3],
+        timestamp : new Date(parseInt(transaction[4]) * 1000).toLocaleString(),
+        keyword : transaction[5],
+      })));
+      
+      console.log(availableTransactions);
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
 
   /**
    * Check if a wallet is connected and retrieve the current account.
@@ -63,19 +88,29 @@ export const TransactionsProvider = ({ children }) => {
         return alert("Please install MetaMask");
       }
       const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+      console.log(accounts);
+      
       if (accounts.length) {
         setCurrentAccount(accounts[0]);
-        // TODO: Fetch transactions
-        window.localStorage.setItem("transactionCount", "0"); //todo
-        setTransactionCount(window.localStorage?.getItem('transactionCount'));
+        getAllTransactions()
       } else {
         console.log("No account found");
       }
     } catch (error) {
       console.log(error);
-      throw new Error("No Ethereum object.");
     }
   };
+
+  const checkIfTransactionsExist = async () => {
+    try {
+      const transactionContract = await createEthereumContract();
+      const count = await transactionContract.getAllTransactionCount();
+
+      window.localStorage.setItem("transactionCount",count)
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   /**
    * Connect to the wallet.
@@ -89,9 +124,9 @@ export const TransactionsProvider = ({ children }) => {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       setCurrentAccount(accounts[0]);
       window.location.reload();
+
     } catch (error) {
       console.log(error);
-      throw new Error("No Ethereum object.");
     }
   };
 
@@ -105,7 +140,7 @@ export const TransactionsProvider = ({ children }) => {
       }
 
       const { addressTo, amount, keyword, message } = formData;
-      const transactionContract = await getEthereumContract();
+      const transactionContract = await createEthereumContract();
       const parseAmount = '0x' + ethers.parseEther(amount).toString(16);
 
       /**
@@ -134,11 +169,10 @@ export const TransactionsProvider = ({ children }) => {
 
       const count = await transactionContract.getAllTransactionCount();
       setTransactionCount(count);
-
       window.location.reload();
+
     } catch (error) {
       console.log(error);
-      throw new Error("No Ethereum object.");
     }
   };
 
@@ -147,7 +181,31 @@ export const TransactionsProvider = ({ children }) => {
    */
   useEffect(() => {
     checkIfWalletConnected();
+    checkIfTransactionsExist();
   }, []);
+
+/**
+ * Handle account changes in MetaMask
+ */
+useEffect(() => {
+  ethereum?.on("accountsChanged", handleAccountChange);
+  return () => {
+    ethereum?.removeListener("accountsChanged", handleAccountChange);
+  };
+}, []);
+
+const handleAccountChange = (accounts) => {
+  // Check if accounts array is passed
+  if (!accounts || accounts.length === 0) {
+    console.log("Please connect to MetaMask");
+    // Handle disconnection logic, if needed
+    setCurrentAccount(null); // Clear current account
+  } else if (accounts[0] !== currentAccount) {
+    // Update the current account if it has changed
+    setCurrentAccount(accounts[0]); // Update state
+    console.log(`Switched to account: ${accounts[0]}`);
+  }
+};
 
   return (
     <TransactionsContext.Provider value={{
@@ -155,10 +213,12 @@ export const TransactionsProvider = ({ children }) => {
       formData,
       isLoading,
       transactionCount,
+      allTransactions,
       connectToWallet,
       setFormData,
       handleformChange,
-      sentTransaction
+      sentTransaction,
+      setAllTransactions
     }}>
       {children}
     </TransactionsContext.Provider>

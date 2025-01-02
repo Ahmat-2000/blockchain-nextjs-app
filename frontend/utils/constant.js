@@ -15,3 +15,12 @@ export const contractAddress = '0x214346884e8dF3AF122d229C06ACF697fD9C9798';
  * We use this abi to interact with the contract within the blockchain and outside the blockchain
  */
 export const contractABI = ABI.abi;
+
+/**
+ * 
+ * @param {*} item 
+ * @returns 
+ */
+export const sliceAddress = (item ) => {
+  return `${item.slice(0,8)}...${item.slice(item.length - 12, )}`
+};
