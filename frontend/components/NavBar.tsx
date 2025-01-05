@@ -1,12 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-import React, { useContext, useState } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, {useState } from 'react';
 import Image from 'next/image';
 import logo from '@/images/logo.png';
 import { IoMdClose } from "react-icons/io";
 import { IoMdMenu } from "react-icons/io";
-import { TransactionsContext } from "@/context/TransactionContext";
 
 type NavBarItemPropsType = {
   title : string,
@@ -23,11 +22,6 @@ const NavBarItem: React.FC<NavBarItemPropsType> = ({title, className}) => {
 const navList: string[] = ["Market", "Exchange", "Tutorials", "Wallets"];
 
 const NavBar: React.FC = () => {
-  const { 
-    currentAccount, 
-    connectToWallet, 
-    disconnectWallet
-  } : any = useContext(TransactionsContext);
   const [toggleMenu, setToggleMenu] = useState<boolean>(false);
   return (
     <nav className="flex justify-between items-center p-4 ">
