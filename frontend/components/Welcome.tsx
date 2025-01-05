@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import { AiFillPlayCircle } from "react-icons/ai";
 import { SiEthereum } from "react-icons/si";
@@ -11,7 +12,6 @@ type inputType = {
   value: string | number;
   name: string;
   type: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   handelChange: (e:any) => void
 };
 
@@ -29,19 +29,17 @@ const Input: React.FC<inputType> = ({placeholder, name, type, handelChange, valu
   );
 };
 
-const Welcome: React.FC = (): React.JSX.Element => {
+const Welcome = () => {  
   const { 
     currentAccount, 
     formData,
     isLoading, 
     connectToWallet, 
-    handleformChange,
+    handleFormChange,
     sentTransaction 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } : any = useContext(TransactionsContext);
 
   const marketList = ["Binance","CoinMarketCap","Blockchain","CoinBase","ECNCapital","Principal"];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSubmit = (e: any) => {
     const {addressTo , amount, keyword, message} = formData;
     e.preventDefault();
@@ -105,17 +103,17 @@ const Welcome: React.FC = (): React.JSX.Element => {
         </div>
 
         <form className="flex flex-col justify-start items-center w-full max-w-lg rounded-lg blue-glassmorphism border p-5 shadow-purple-700 shadow-md md:w-96 md:order-2 ">
-          <Input name="addressTo" value={formData.addressTo} placeholder="Address To" type="text" handelChange={handleformChange}/>
-          <Input name="amount" value={formData.amount} placeholder="Amount (ETH)" type="number" handelChange={handleformChange}/>
-          <Input name="keyword" value={formData.keyword} placeholder="Keyword (GIFT)" type="text" handelChange={handleformChange}/>
-          <Input name="message" value={formData.message} placeholder="Enter Message" type="text" handelChange={handleformChange}/>
+          <Input name="addressTo" value={formData.addressTo} placeholder="Address To" type="text" handelChange={handleFormChange}/>
+          <Input name="amount" value={formData.amount} placeholder="Amount (ETH)" type="number" handelChange={handleFormChange}/>
+          <Input name="keyword" value={formData.keyword} placeholder="Keyword (GIFT)" type="text" handelChange={handleFormChange}/>
+          <Input name="message" value={formData.message} placeholder="Enter Message" type="text" handelChange={handleFormChange}/>
           <div className="h-[1px] w-full bg-gray-600 my-2" />
 
           {
             isLoading ? 
             <Loader /> 
             : 
-            <button type="button" onClick={handleSubmit} className="w-full mt-2 border-[1px] p-2 border-gray-600 cursor-pointer rounded-lg hover:bg-slate-300 text-black transition-colors duration-500 bg-slate-400">
+            <button type="button" disabled={currentAccount ? false : true} onClick={handleSubmit} className="w-full mt-2 border-[1px] p-2 border-gray-600 cursor-pointer rounded-lg hover:bg-slate-300 text-black transition-colors duration-500 bg-slate-400">
               Send Now
             </button>
           }
